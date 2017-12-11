@@ -1,184 +1,171 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Tic-Tac-Toe</title>
-	<style type="text/css">
-		input[type=button] {
-			width: 100px;
-			height: 100px;
-			font-size: 500%;
-			text-align: center;
-		}
-	</style>
-	<script type="text/javascript">
-		var buttons = new Array() // arrays are dynamic - no initial size
-		var btnsforpc = new Array()
-		var nextButton = 0
-		var nextforpc =0
-
-		var charsA = new Array();
-		var charsB = new Array();
-
-		function clean(){
-			for (var a = 3; a >= 0; a--) {
-				for (var b = 3; b >= 0; b--) {
-					var btn = document.getElementById("button"+a+b)
-					btn.value=" "
-				}
-			}
-			buttons.length=0;
-			btnsforpc.length=0
-
-		}
-
-		function isWinPerson(){
-			var charA;
-			var charB;
-			for (var i = buttons.length - 1; i >= 0; i--) {
-				charsA[i] = buttons[i].id.charAt(6)
-				charsB[i] = buttons[i].id.charAt(7)
-			}
-			if(charsA[0]==charsA[1] && charsA[2]==charsA[3] && charsA[0]==charsA[3]){
-				return true;
-			}
-			else if(charsB[0]==charsB[1] && charsB[2]==charsB[3] && charsB[0]==charsB[3]){
-				return true
-			}
-			else if(charsA[0]==charsB[0] && charsA[1]==charsB[1] && charsA[2]==charsB[2] && charsA[3]==charsB[3] ){
-				return true;
-			}
-			else if(charsA[0]==3-charsB[0] && charsA[1]==3-charsB[1]&& charsA[2]== 3- charsB[2] && charsA[3]==3-charsB[3]){
-				return true;
-			}
-			else return false;
-
-		}
-		function isWinPc(){
-			var charA;
-			var charB;
-			for (var i = btnsforpc.length - 1; i >= 0; i--) {
-				charsA[i] = btnsforpc[i].id.charAt(6)
-				charsB[i] = btnsforpc[i].id.charAt(7)
-			}
-			if(charsA[0]==charsA[1] && charsA[2]==charsA[3] && charsA[0]==charsA[3]){
-				return true;
-			}
-			else if(charsB[0]==charsB[1] && charsB[2]==charsB[3] && charsB[0]==charsB[3]){
-				return true
-			}
-			else if(charsA[0]==charsB[0] && charsA[1]==charsB[1] && charsA[2]==charsB[2] && charsA[3]==charsB[3] ){
-				return true;
-			}
-			else if(charsA[0]==3-charsB[0] && charsA[1]==3-charsB[1]&& charsA[2]== 3- charsB[2] && charsA[3]==3-charsB[3]){
-				return true;
-			}
-			else return false;
-
-		}
-		
-		function handleButton(clickedButton) {
-		if(clickedButton.value!=' '){
-			alert('You cannot click this button')
-		}
-		else{
-			if (buttons[nextButton]) { // if the array slot is not null
-				buttons[nextButton].value=" " // blank the oldest button (the one at nextButton)
-			}
-			clickedButton.value='X'
-			buttons[nextButton] = clickedButton // store the clicked button
-			nextButton = (nextButton + 1) % 4 // advance the index circularly
-
-			if(isWinPerson() && buttons.length==4){
-				alert("YOU WON!!! YAYY :)")
-				location.reload()
-				return
-			}
-			
-			pcPlays()
-			if(isWinPc() && btnsforpc.length==4){
-				alert("PC WON!!! :(")
-				location.reload()
-				return
-			}
-		}
-		
-		
-		//... // set clickedButton to X or O
-		
-
-		}
-		function pcPlays(){
-			var a = Math.floor(Math.random()*4)
-			var b = Math.floor(Math.random()*4)
-			var btn=document.getElementById("button"+a+b)
-			while(btn.value!=' '){
-				a = Math.floor(Math.random()*4)
-				b = Math.floor(Math.random()*4)
-				btn=document.getElementById('button'+a+b)
-			}
-			if (btnsforpc[nextforpc]) { // if the array slot is not null
-				btnsforpc[nextforpc].value=" " // blank the oldest button (the one at nextButton)
-			}
-			btn.value='O'
-			btnsforpc[nextforpc] = btn
-			nextforpc=(nextforpc+1)%4
-
-
-		}
-	</script>
-</head>
-
-<body>
-	<table>
-		<tbody>
-<tr>
-<td><input id="button00" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button01" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button02" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button03" value=" " onclick="handleButton(this)"
-type="button"></td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td><input id="button10" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button11" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button12" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button13" value=" " onclick="handleButton(this)"
-type="button"></td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td><input id="button20" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button21" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button22" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button23" value=" " onclick="handleButton(this)"
-type="button"></td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td><input id="button30" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button31" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button32" value=" " onclick="handleButton(this)"
-type="button"></td>
-<td><input id="button33" value=" " onclick="handleButton(this)"
-type="button"></td>
-</tr>
-</tbody>
-
-</table>
-
-</body>
+   <head>
+      <title>Tic-Tac-Toe</title>
+      <style type="text/css">
+         input[type=button] {
+         width: 100px;
+         height: 100px;
+         font-size: 500%;
+         text-align: center;
+         }
+      </style>
+      <script type="text/javascript">
+         var buttons = new Array() // arrays are dynamic - no initial size
+         var btnsforpc = new Array()
+         var nextButton = 0
+         var nextforpc =0
+         var charsA = new Array();
+         var charsB = new Array();
+         function clean(){
+         	for (var a = 3; a >= 0; a--) {
+         		for (var b = 3; b >= 0; b--) {
+         			var btn = document.getElementById("button"+a+b)
+         			btn.value=" "
+         		}
+         	}
+         	buttons.length=0;
+         	btnsforpc.length=0
+         }
+         function isWinPerson(){
+         	var charA;
+         	var charB;
+         	for (var i = buttons.length - 1; i >= 0; i--) {
+         		charsA[i] = buttons[i].id.charAt(6)
+         		charsB[i] = buttons[i].id.charAt(7)
+         	}
+         	if(charsA[0]==charsA[1] && charsA[2]==charsA[3] && charsA[0]==charsA[3]){
+         		return true;
+         	}
+         	else if(charsB[0]==charsB[1] && charsB[2]==charsB[3] && charsB[0]==charsB[3]){
+         		return true
+         	}
+         	else if(charsA[0]==charsB[0] && charsA[1]==charsB[1] && charsA[2]==charsB[2] && charsA[3]==charsB[3] ){
+         		return true;
+         	}
+         	else if(charsA[0]==3-charsB[0] && charsA[1]==3-charsB[1]&& charsA[2]== 3- charsB[2] && charsA[3]==3-charsB[3]){
+         		return true;
+         	}
+         	else return false;
+         }
+         function isWinPc(){
+         	var charA;
+         	var charB;
+         	for (var i = btnsforpc.length - 1; i >= 0; i--) {
+         		charsA[i] = btnsforpc[i].id.charAt(6)
+         		charsB[i] = btnsforpc[i].id.charAt(7)
+         	}
+         	if(charsA[0]==charsA[1] && charsA[2]==charsA[3] && charsA[0]==charsA[3]){
+         		return true;
+         	}
+         	else if(charsB[0]==charsB[1] && charsB[2]==charsB[3] && charsB[0]==charsB[3]){
+         		return true
+         	}
+         	else if(charsA[0]==charsB[0] && charsA[1]==charsB[1] && charsA[2]==charsB[2] && charsA[3]==charsB[3] ){
+         		return true;
+         	}
+         	else if(charsA[0]==3-charsB[0] && charsA[1]==3-charsB[1]&& charsA[2]== 3- charsB[2] && charsA[3]==3-charsB[3]){
+         		return true;
+         	}
+         	else return false;
+         }
+         
+         function handleButton(clickedButton) {
+         if(clickedButton.value!=' '){
+         	alert('You cannot click this button')
+         }
+         else{
+         	if (buttons[nextButton]) { // if the array slot is not null
+         		buttons[nextButton].value=" " // blank the oldest button (the one at nextButton)
+         	}
+         	clickedButton.value='X'
+         	buttons[nextButton] = clickedButton // store the clicked button
+         	nextButton = (nextButton + 1) % 4 // advance the index circularly
+         	if(isWinPerson() && buttons.length==4){
+         		alert("YOU WON!!! YAYY :)")
+         		location.reload()
+         		return
+         	}
+         	
+         	pcPlays()
+         	if(isWinPc() && btnsforpc.length==4){
+         		alert("PC WON!!! :(")
+         		location.reload()
+         		return
+         	}
+         }
+         
+         
+         //... // set clickedButton to X or O
+         
+         }
+         function pcPlays(){
+         	var a = Math.floor(Math.random()*4)
+         	var b = Math.floor(Math.random()*4)
+         	var btn=document.getElementById("button"+a+b)
+         	while(btn.value!=' '){
+         		a = Math.floor(Math.random()*4)
+         		b = Math.floor(Math.random()*4)
+         		btn=document.getElementById('button'+a+b)
+         	}
+         	if (btnsforpc[nextforpc]) { // if the array slot is not null
+         		btnsforpc[nextforpc].value=" " // blank the oldest button (the one at nextButton)
+         	}
+         	btn.value='O'
+         	btnsforpc[nextforpc] = btn
+         	nextforpc=(nextforpc+1)%4
+         }
+      </script>
+   </head>
+   <body>
+      <table>
+         <tbody>
+            <tr>
+               <td><input id="button00" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button01" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button02" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button03" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+            </tr>
+         </tbody>
+         <tbody>
+            <tr>
+               <td><input id="button10" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button11" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button12" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button13" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+            </tr>
+         </tbody>
+         <tbody>
+            <tr>
+               <td><input id="button20" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button21" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button22" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button23" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+            </tr>
+         </tbody>
+         <tbody>
+            <tr>
+               <td><input id="button30" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button31" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button32" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+               <td><input id="button33" value=" " onclick="handleButton(this)"
+                  type="button"></td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
